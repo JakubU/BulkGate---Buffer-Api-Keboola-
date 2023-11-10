@@ -1,0 +1,37 @@
+{
+    "description": "This receiver receives events from BulkGate.",
+    "exports": [
+      {
+        "conditions": {
+          "count": 1
+        },
+        "id": "4",
+        "mapping": {
+          "tableId": "in.c-BulkGate.sms",
+          "incremental": true,
+          "columns": [
+            {
+              "primaryKey": true,
+              "type": "id",
+              "name": "id"
+            },
+            { "type": "datetime", "name": "datetime" },
+            { "type": "ip", "name": "ip" },
+            { "type": "body", "name": "body" },
+            { "type": "headers", "name": "headers" },
+            {
+              "type": "template",
+              "name": "template",
+              "template": {
+                "language": "jsonnet",
+                "content": "'#' + Now() + ': ' + Body()"
+              }
+            }
+          ]
+        },
+        "name": "Raw Data Export"
+      }
+    ],
+    "id": "BulkGate5",
+    "name": "BulkGate Webhook Receiver"
+  }
